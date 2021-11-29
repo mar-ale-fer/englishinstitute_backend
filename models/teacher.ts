@@ -16,13 +16,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     firstName!: string;
     lastName!: string;
     phoneNumber!: string;
-    // static associate(models: any) {
-    //   Teacher.hasMany(models.Class,{
-    //     foreignKey: { allowNull: false },
-    //     onDelete:"RESTRICT",
-    //     onUpdate:"RESTRICT",
-    //   })
-    // }
+    static associate(models: any) {
+      Teacher.hasMany(models.Class,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })
+    }
   };
   Teacher.init({
     id: {
