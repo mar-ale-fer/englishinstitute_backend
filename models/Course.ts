@@ -1,38 +1,40 @@
 'use strict';
 import {Model} from 'sequelize';
 
-interface ClassAttributes {
+interface CourseAttributes {
   id: number;
   year: number;
   schedule: string;
-  classRoom: string
+  details: string;
+  monthlyPrice: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
 
-  class Class extends Model<ClassAttributes>
-  implements ClassAttributes {
+  class Course extends Model<CourseAttributes>
+  implements CourseAttributes {
     id!: number;
     year!: number;
     schedule!: string;
-    classRoom!: string;
+    details!: string;
+    monthlyPrice!: number;
     static associate(models: any) {
-      Class.belongsTo(models.Level,{
+      Course.belongsTo(models.Level,{
         foreignKey: { allowNull: false },
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
-      Class.belongsTo(models.Teacher,{
+      Course.belongsTo(models.Teacher,{
         foreignKey: { allowNull: false },
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
-      Class.belongsToMany(models.Student,{
+      Course.belongsToMany(models.Student,{
           through: 'Enrollment'
         })
     }
   };
-  Class.init({
+  Course.init({
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -47,13 +49,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    classRoom:{
+    details:{
       type: DataTypes.STRING,
       allowNull: false,
-    }    
+    },
+    monthlyPrice:{
+      type: DataTypes.DECIMAL(10,2),
+      allowNull: false,
+    }      
   }, {
     sequelize, 
     modelName: 'Class',
   });
-  return Class;
+  return Course;
 };

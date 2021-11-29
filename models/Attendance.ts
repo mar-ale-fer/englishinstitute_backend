@@ -18,7 +18,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
-      Attendance.belongsTo(models.Class,{
+      Attendance.belongsTo(models.Course,{
         foreignKey: { allowNull: false },
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
