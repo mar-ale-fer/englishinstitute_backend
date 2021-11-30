@@ -10,6 +10,7 @@ interface StudentAttributes {
   phoneNumber: string;
   email: string;
   observations: string;
+  auditLastUser: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -24,6 +25,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     phoneNumber!: string;
     email!: string;
     observations!: string;
+    auditLastUser!: string;    
     static associate(models: any) {
       Student.belongsToMany(models.Course,{
         through: 'Enrollment'
@@ -69,7 +71,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     observations:{
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    auditLastUser:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },      
   }, {
     sequelize,
     modelName: 'Student',

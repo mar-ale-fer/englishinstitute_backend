@@ -8,6 +8,7 @@ interface CourseAttributes {
   details: string;
   monthlyPrice: number;
   active: boolean;
+  auditLastUser: string;  
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -20,6 +21,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     details!: string;
     monthlyPrice!: number;
     active!: boolean;
+    auditLastUser!: string;    
     static associate(models: any) {
       Course.belongsTo(models.Level,{
         foreignKey: { allowNull: false },
@@ -67,7 +69,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     active:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
-    }               
+    },
+    auditLastUser:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },                  
   }, {
     sequelize, 
     modelName: 'Course',

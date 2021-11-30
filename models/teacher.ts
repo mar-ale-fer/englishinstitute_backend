@@ -6,6 +6,7 @@ interface TeacherAttributes {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  auditLastUser: string;  
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -16,6 +17,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     firstName!: string;
     lastName!: string;
     phoneNumber!: string;
+    auditLastUser!: string;    
     static associate(models: any) {
       Teacher.hasMany(models.Course,{
         foreignKey: { allowNull: false },
@@ -47,8 +49,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     phoneNumber:{
       type: DataTypes.STRING,
       allowNull: false,
-    }
-
+    },
+    auditLastUser:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },      
   }, {
     sequelize,
     modelName: 'Teacher',

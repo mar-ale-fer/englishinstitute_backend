@@ -4,6 +4,7 @@ import {Model} from 'sequelize';
 interface AttendanceAttributes {
   id: number;
   day: Date;
+  auditLastUser: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -12,6 +13,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   implements AttendanceAttributes {
     id!: number;
     day!: Date;
+    auditLastUser!: string;
     static associate(models: any) {
       Attendance.belongsTo(models.Student,{
         foreignKey: { allowNull: false },
@@ -40,7 +42,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     day:{
       type: DataTypes.DATE,
       allowNull: false,
-    }
+    },
+    auditLastUser:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },    
   }, {
     sequelize, 
     modelName: 'Attendance',

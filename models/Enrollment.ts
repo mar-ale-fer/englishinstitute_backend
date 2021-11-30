@@ -4,6 +4,7 @@ import { Model } from 'sequelize';
 interface EnrollmentAttributes {
   StudentId: number;
   CourseId: number;
+  auditLastUser: string;  
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -11,6 +12,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
    implements EnrollmentAttributes {
     StudentId!:number;
     CourseId!:number;
+    auditLastUser!: string;    
     static associate(models: any) {
       // define association here
     }
@@ -33,7 +35,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         model: 'Courses',
         key: 'id'
       }
-    }
+    },
+    auditLastUser:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },       
   }, {
     sequelize,
     modelName: 'Enrollment',
