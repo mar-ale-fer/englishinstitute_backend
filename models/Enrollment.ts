@@ -3,14 +3,14 @@ import { Model } from 'sequelize';
 
 interface EnrollmentAttributes {
   StudentId: number;
-  ClassId: number;
+  CourseId: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class Enrollment extends Model<EnrollmentAttributes>
    implements EnrollmentAttributes {
     StudentId!:number;
-    ClassId!:number;
+    CourseId!:number;
     static associate(models: any) {
       // define association here
     }
@@ -25,12 +25,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
         key: 'id'
       },
     },
-    ClassId: {
+    CourseId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'Classes',
+        model: 'Courses',
         key: 'id'
       }
     }

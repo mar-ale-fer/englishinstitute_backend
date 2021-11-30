@@ -7,6 +7,7 @@ interface CourseAttributes {
   schedule: string;
   details: string;
   monthlyPrice: number;
+  active: boolean;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -18,6 +19,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     schedule!: string;
     details!: string;
     monthlyPrice!: number;
+    active!: boolean;
     static associate(models: any) {
       Course.belongsTo(models.Level,{
         foreignKey: { allowNull: false },
@@ -31,7 +33,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
       })
       Course.belongsToMany(models.Student,{
           through: 'Enrollment'
-        })
+      })
+      Course.belongsTo(models.Institute,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })      
     }
   };
   Course.init({
@@ -56,10 +63,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
     monthlyPrice:{
       type: DataTypes.DECIMAL(10,2),
       allowNull: false,
-    }      
+    },
+    active:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    }               
   }, {
     sequelize, 
-    modelName: 'Class',
+    modelName: 'Course',
   });
   return Course;
 };

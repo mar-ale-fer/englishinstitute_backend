@@ -1,26 +1,25 @@
 'use strict';
 import {Model} from 'sequelize';
-
-interface LevelAttributes {
+interface InstituteAttributes {
   id: number;
   name: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
   
-  class Level extends Model<LevelAttributes>
-  implements LevelAttributes {
+  class Institute extends Model<InstituteAttributes>
+  implements InstituteAttributes {
     id!: number;
     name!: string;
     static associate(models: any) {
-      Level.hasMany(models.Course,{
+      Institute.hasMany(models.User,{
         foreignKey: { allowNull: false },
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
     }
   };
-  Level.init({
+  Institute.init({
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -34,7 +33,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
   }, {
     sequelize, 
-    modelName: 'Level',
+    modelName: 'Institute',
   });
-  return Level;
+  return Institute;
 };

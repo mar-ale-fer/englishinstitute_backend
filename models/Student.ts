@@ -28,6 +28,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
       Student.belongsToMany(models.Course,{
         through: 'Enrollment'
       })
+      Student.belongsTo(models.Institute,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })      
     }
   };
   Student.init({

@@ -23,6 +23,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
+      Attendance.belongsTo(models.Institute,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })      
     }
   };
   Attendance.init({
