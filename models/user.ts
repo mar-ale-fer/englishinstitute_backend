@@ -3,13 +3,13 @@ import {Model} from 'sequelize';
 
 interface UserAttributes {
   id: number;
-  code: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  mustChangePassword: boolean;
   backend: boolean; //is a platform's IT backender?
-  roles: string; //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','SYSADMIN]"}
+  roles: string; //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','INSTITUTE]"}
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -17,10 +17,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model<UserAttributes>
   implements UserAttributes {
     id!: number;
-    code!: string;
     firstName!: string;
     lastName!: string;
     email!: string;
+    mustChangePassword!: boolean;    
     password!: string;
     backend!: boolean;
     roles!: string;
@@ -38,11 +38,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-    },
-    code:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },       
+    },      
     firstName:{
       type: DataTypes.STRING,
       allowNull: false,
@@ -55,6 +51,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    mustChangePassword:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },     
     password:{
       type: DataTypes.STRING,
       allowNull: false,

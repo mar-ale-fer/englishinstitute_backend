@@ -51,21 +51,23 @@ prompt.get(properties, async function (err, result) {
 
     const newInstitute : instituteType = {
         id : null,
-        name : result.instituteName as string
-
+        name : result.instituteName as string,
+        active : true
     }
 
     const InstituteId : number = await insertInstitute(newInstitute)
 
     const newUser : userType = {
         id: null,
-        code: result.userCode as string,
         firstName: result.firstName as string,
         lastName: result.lastName as string,
         email: result.email as string,
         backend: true,
+        mustChangePassword: false,
         password: result.password as string,
-        roles: "[]",
+        roles: {
+            roles:['ADMINISTRATOR','INSTITUTE','STUDENT','TEACHER']
+        },
         InstituteId: InstituteId
     }
     insertUser(newUser)

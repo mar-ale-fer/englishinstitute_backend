@@ -1,11 +1,13 @@
+import { rolesType } from "./roleType"
+
 export type userType = {
     id: number | null
-    code: string
     firstName: string
     lastName: string
     email: string
+    mustChangePassword: boolean
     password: string
     backend: boolean //is a platform's IT backender?
-    roles: string //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','SYSADMIN]"}
+    roles: rolesType //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','INSTITUTE]"}
     InstituteId: number
   }

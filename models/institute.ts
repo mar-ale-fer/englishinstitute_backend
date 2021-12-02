@@ -3,6 +3,7 @@ import {Model} from 'sequelize';
 interface InstituteAttributes {
   id: number;
   name: string;
+  active: boolean;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -11,6 +12,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   implements InstituteAttributes {
     id!: number;
     name!: string;
+    active!: boolean;
     static associate(models: any) {
       Institute.hasMany(models.User,{
         foreignKey: { allowNull: false },
@@ -29,8 +31,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     name:{
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    active:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
     }
-
   }, {
     sequelize, 
     modelName: 'Institute',
