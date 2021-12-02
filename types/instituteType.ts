@@ -1,4 +1,4 @@
 export type instituteType = {
-    id: number
+    id: number | null
     name: string
   }

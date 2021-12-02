@@ -1,6 +1,9 @@
 import prompt from 'prompt';
-import { insertUser } from '../model-utils/insertUser';
 import { userType } from '../types/userType';
+import { instituteType } from '../types/instituteType';
+import { insertUser } from '../model-utils/insertUser';
+import { insertInstitute } from '../model-utils/insertInstitute';
+
 
 const properties = [
     {
@@ -9,7 +12,7 @@ const properties = [
         warning: 'Institute name must be only letters, spaces, or dashes'
     },
     {
-        name: 'code',
+        name: 'userCode',
         validator: /^[a-zA-Z\s\-]+$/,
         warning: 'Code must be only letters, spaces, or dashes'
     },    
@@ -36,27 +39,35 @@ const properties = [
 
 prompt.start();
 
-prompt.get(properties, function (err, result) {
+prompt.get(properties, async function (err, result) {
     if (err) { return onErr(err); }
     console.log('Command-line input received:');
     console.log('  Institute name: ' + result.instituteName);    
-    console.log('  Code: ' + result.code);
+    console.log('  Code: ' + result.userCode);
     console.log('  First name: ' + result.firstName);
     console.log('  Last name: ' + result.lastName);
     console.log('  Email: ' + result.email);    
     console.log('  Password: *****' );
 
+    const newInstitute : instituteType = {
+        id : null,
+        name : result.instituteName as string
+
+    }
+
+    const InstituteId : number = await insertInstitute(newInstitute)
+
     const newUser : userType = {
-        id: 0,
-        code: result.code as string,
+        id: null,
+        code: result.userCode as string,
         firstName: result.firstName as string,
         lastName: result.lastName as string,
         email: result.email as string,
         backend: true,
         password: result.password as string,
-        roles: "[]"
+        roles: "[]",
+        InstituteId: InstituteId
     }
-
     insertUser(newUser)
 
 });
