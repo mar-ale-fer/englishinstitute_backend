@@ -1,17 +1,53 @@
 import { instituteType } from "../../types/instituteType";
 import { userType } from "../../types/userType";
+import { rolesType} from "../../types/roleType";
 import bcrypt from 'bcrypt'
 
 export const resolvers =  {
   Mutation: {
-    createInstitute: async ( _: any , args: any, { models, req }: {models:any, req: any}) => {
+    createInstituteWithUser: async ( _: any , args: any, { models, req }: {models:any, req: any}) => {
       const newInstitute : instituteType = {
         id: null,
         name: args.name,
         active: true
-      }
-
+      } 
+      
       try {
+        //check if an Institute with the same name already exists
+        const InstituteFound = await models.Institute.findOne({ 
+          where: { 
+          name: newInstitute.name,
+          } 
+        })  
+        if (InstituteFound) {
+          return {
+            success: false,
+            message: `Ya existe un instituto con el nombre ${newInstitute.name}.`, 
+            institute: {
+              id: 0,
+              name: newInstitute.name,
+              active: false
+            } 
+          }   
+        }
+        //check if an user with the same email already exists
+        const userFound = await models.User.findOne({ 
+          where: { 
+          email: args.email,
+          } 
+        })  
+        if (userFound) {
+          return {
+            success: false,
+            message: `Ya existe un usuario con el email ${args.email}.`, 
+            institute: {
+              id: 0,
+              name: newInstitute.name,
+              active: false
+            } 
+          }   
+        }
+
         const insertedInstitute = await models.Institute.create(newInstitute)
         console.log(insertedInstitute.dataValues)
 
@@ -21,6 +57,9 @@ export const resolvers =  {
         // now we set user password to hashed password
         const hashedPassword : string = await bcrypt.hash(args.password, salt);
 
+        const instituteRole : rolesType = {
+          roles : [ 'INSTITUTE','ADMINISTRATOR','SECRETARY']
+        }
         const newUser : userType = {
           id: null,
           firstName : args.firstName,
@@ -29,7 +68,7 @@ export const resolvers =  {
           mustChangePassword: true,
           password: hashedPassword,
           backend: false, //this is true only in create-super-user
-          roles: args.roles, //ToDo: add format validation of the roles as an array
+          roles: instituteRole,
           InstituteId : insertedInstitute.dataValues.id
         }
 
@@ -54,7 +93,11 @@ export const resolvers =  {
         return {
           success: false,
           message: `Error al crear el instituto. ${errormessage}.`, 
-          institute: newInstitute
+          institute: {
+            id: 0,
+            name: newInstitute.name,
+            active: false
+          } 
         }                
       }
     }

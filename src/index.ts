@@ -2,6 +2,8 @@ import { ApolloServer, gql } from 'apollo-server';
 
 //Teacher
 import { typeDefs as teacherTypeDefs } from './graphql/TeacherTypeDefs';
+import { typeDefs as instituteTypeDefs } from './graphql/InstituteTypeDefs';
+import { resolvers as instituteResolvers } from './graphql/InstituteResolvers';
 import models  from '../models';
 import db  from '../models';
 // const server = new ApolloServer({
@@ -11,20 +13,21 @@ import db  from '../models';
 // });
 
 const server = new ApolloServer({
-    typeDefs:[teacherTypeDefs],
+    typeDefs:[teacherTypeDefs, instituteTypeDefs],
+    resolvers:[instituteResolvers],
     context: (req: any) => ({ models, req }),
 })
 
-//migration mode
-//db.sequelize.sync({ match: /_dev$/}).then(() => {
-db.sequelize.sync({ match: /institutedb$/, force: true }).then(() => {
-server.listen().then(({ url }: {url:String}) => {
-    console.log(`Server listening at ${url}`);
-})
-})
-
-
-//normal mode
+// //migration mode
+// //db.sequelize.sync({ match: /_dev$/}).then(() => {
+// db.sequelize.sync({ match: /institutedb$/, force: true }).then(() => {
 // server.listen().then(({ url }: {url:String}) => {
 //     console.log(`Server listening at ${url}`);
 // })
+// })
+
+
+//normal mode
+server.listen().then(({ url }: {url:String}) => {
+    console.log(`Server listening at ${url}`);
+})

@@ -4,13 +4,14 @@ export const typeDefs = gql`
 
   type Mutation {
     createInstituteWithUser(
+      name: String!
       firstName: String!
       lastName: String!
       email: String!
       password: String!
     ): InstituteCRUDResponse!
   }
-  type UserCRUDResponse {
+  type InstituteCRUDResponse {
     success: Boolean!
     message: String!
     institute: Institute!
@@ -26,7 +27,7 @@ export const typeDefs = gql`
   }
 
   type Institute {
-    id: Id!
+    id: ID!
     name: String
     active: Boolean
   }
