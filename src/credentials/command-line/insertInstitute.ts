@@ -1,5 +1,5 @@
-import { instituteType } from '../types/instituteType'
-import models from '../models'
+import { instituteType } from '../../../types/instituteType'
+import models from '../../../models'
 
 export const insertInstitute = async (newInstitute : instituteType): Promise<number> => {
     try {

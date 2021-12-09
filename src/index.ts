@@ -1,9 +1,11 @@
 import { ApolloServer, gql } from 'apollo-server';
 
-//Teacher
-import { typeDefs as teacherTypeDefs } from './graphql/TeacherTypeDefs';
-import { typeDefs as instituteTypeDefs } from './graphql/InstituteTypeDefs';
-import { resolvers as instituteResolvers } from './graphql/InstituteResolvers';
+import { typeDefs as teacherTypeDefs } from './teacher/teacherTypeDefs';
+import { typeDefs as credentialsTypeDefs } from './credentials/credentialsTypeDefs';
+import { resolvers as credentialsResolvers } from './credentials/credentialsResolvers';
+import { typeDefs as instituteTypeDefs } from './institute/InstituteTypeDefs';
+import { resolvers as instituteResolvers } from './institute/InstituteResolvers';
+
 import models  from '../models';
 import db  from '../models';
 // const server = new ApolloServer({
@@ -13,8 +15,8 @@ import db  from '../models';
 // });
 
 const server = new ApolloServer({
-    typeDefs:[teacherTypeDefs, instituteTypeDefs],
-    resolvers:[instituteResolvers],
+    typeDefs:[teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs],
+    resolvers:[instituteResolvers, credentialsResolvers],
     context: (req: any) => ({ models, req }),
 })
 

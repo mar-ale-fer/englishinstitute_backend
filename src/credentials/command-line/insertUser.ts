@@ -1,5 +1,5 @@
-import { userType } from "../types/userType"
-import models from '../models'
+import { userType } from "../../../types/userType"
+import models from '../../../models'
 import bcrypt from 'bcrypt'
 
 

@@ -1,8 +1,8 @@
 import prompt from 'prompt';
-import { userType } from '../types/userType';
-import { instituteType } from '../types/instituteType';
-import { insertUser } from '../model-utils/insertUser';
-import { insertInstitute } from '../model-utils/insertInstitute';
+import { userType } from '../../../types/userType';
+import { instituteType } from '../../../types/instituteType';
+import { insertUser } from './insertUser';
+import { insertInstitute } from './insertInstitute';
 
 
 const properties = [

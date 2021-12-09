@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn --transpile-only src\\index.ts",
-    "create-super-user": "tsnd --transpile-only commandline\\createSuperUser.ts"
+    "create-super-user": "tsnd --transpile-only src\\credentials\\command-line\\createSuperUser.ts"
   },
   "repository": {
     "type": "git",
