@@ -33,7 +33,7 @@ export const resolvers =  {
         //check if an user with the same email already exists
         const userFound = await models.User.findOne({ 
           where: { 
-          email: args.email,
+          email: (args.email as string).toLowerCase(),
           } 
         })  
         if (userFound) {
@@ -64,7 +64,7 @@ export const resolvers =  {
           id: null,
           firstName : args.firstName,
           lastName: args.lastName,
-          email: args.email,
+          email: (args.email  as string).toLowerCase(),
           mustChangePassword: true,
           password: hashedPassword,
           backend: false, //this is true only in create-super-user
