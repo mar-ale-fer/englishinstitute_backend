@@ -19,6 +19,26 @@ module.exports = (sequelize: any, DataTypes: any) => {
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
+      Institute.hasMany(models.Level,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })
+      Institute.hasMany(models.Course,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })
+      Institute.hasMany(models.Attendance,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })
+      Institute.hasMany(models.Student,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })
     }
   };
   Institute.init({

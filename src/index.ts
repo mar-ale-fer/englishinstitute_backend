@@ -21,7 +21,7 @@ const server = new ApolloServer({
 })
 
 // //migration mode
-// //db.sequelize.sync({ match: /_dev$/}).then(() => {
+//db.sequelize.sync({ match: /_dev$/}).then(() => {
 // db.sequelize.sync({ match: /institutedb$/, force: true }).then(() => {
 // server.listen().then(({ url }: {url:String}) => {
 //     console.log(`Server listening at ${url}`);

@@ -18,6 +18,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         onDelete:"RESTRICT",
         onUpdate:"RESTRICT",
       })
+      Level.belongsTo(models.Institute,{
+        foreignKey: { allowNull: false },
+        onDelete:"RESTRICT",
+        onUpdate:"RESTRICT",
+      })      
     }
   };
   Level.init({
