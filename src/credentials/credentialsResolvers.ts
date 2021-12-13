@@ -28,7 +28,7 @@ export const resolvers =  {
       //compare hashed password with stored password
       const user = await models.User.findOne({
         where: { 
-          email: args.user,
+          email: (args.user as string).toLowerCase(), //the email is ever stored in lowercase
         } 
       });
 
