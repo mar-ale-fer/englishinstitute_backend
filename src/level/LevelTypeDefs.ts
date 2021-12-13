@@ -3,32 +3,18 @@ const { gql } = require('apollo-server');
 export const typeDefs = gql`
 
   type Mutation {
-    createInstituteWithUser(
+    levelCreate(
       name: String!
-      firstName: String!
-      lastName: String!
-      email: String!
-      password: String!
-    ): InstituteCRUDResponse!
+    ): LevelCRUDResponse!
   }
-  type InstituteCRUDResponse {
+  type LevelCRUDResponse {
     success: Boolean!
     message: String!
-    institute: Institute!
+    level: Level!
   }
 
-  type User {
-    id: ID!
-    firstName: String
-    lastName: String
-    email: String
-    roles: String
-    institute: Institute
-  }
-
-  type Institute {
+  type Level {
     id: ID!
     name: String
-    active: Boolean
   }
 `;

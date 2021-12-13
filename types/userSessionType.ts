@@ -6,4 +6,4 @@ export type userSessionType = {
     lastName: string
     roles: rolesType
     backend: boolean
-  }
+  } | null
