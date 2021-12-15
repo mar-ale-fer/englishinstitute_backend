@@ -40,6 +40,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }, {
     sequelize, 
     modelName: 'Level',
+    indexes: [
+      {
+        unique: true,
+        fields: ['InstituteId','name']
+      }
+    ]
   });
   return Level;
 };
