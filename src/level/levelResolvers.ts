@@ -1,7 +1,7 @@
 import log from 'loglevel'
 import { levelType} from '../../types/levelType'
 import { handleLevelCreate} from './levelCreate'
-
+import { handleLevelUpdate } from './levelUpdate'
 const levelOk = (message: string, level : levelType) =>  ({
     success : true,
     message,
@@ -10,6 +10,7 @@ const levelOk = (message: string, level : levelType) =>  ({
 
 export const resolvers = {
     Mutation: {
-        levelCreate: handleLevelCreate
+        levelCreate: handleLevelCreate,
+        levelUpdate: handleLevelUpdate
     }
 }

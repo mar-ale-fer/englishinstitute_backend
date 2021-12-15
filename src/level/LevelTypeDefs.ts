@@ -6,6 +6,10 @@ export const typeDefs = gql`
     levelCreate(
       name: String!
     ): LevelCRUDResponse!
+    levelUpdate(
+      id: ID!
+      name: String!
+    ): LevelCRUDResponse!
   }
   type LevelCRUDResponse {
     success: Boolean!
@@ -14,7 +18,7 @@ export const typeDefs = gql`
   }
 
   type Level {
-    id: ID!
+    id: ID! 
     name: String
   }
 `;
