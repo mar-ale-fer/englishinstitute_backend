@@ -1,5 +1,5 @@
-type role = 'STUDENT' | 'TEACHER' | 'ADMINISTRATOR' | 'INSTITUTE' | 'SECRETARY'
+type roleType = 'STUDENT' | 'TEACHER' | 'ADMINISTRATOR' | 'INSTITUTE' | 'SECRETARY'
 
 export type rolesType = {
-    roles: role[]
+    roles: roleType[]
   }

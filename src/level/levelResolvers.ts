@@ -1,14 +1,12 @@
-import { levelType} from '../../types/levelType'
 import { handleLevelCreate} from './levelCreate'
 import { handleLevelUpdate } from './levelUpdate'
 import { handleLevelDelete } from './levelDelete'
-const levelOk = (message: string, level : levelType) =>  ({
-    success : true,
-    message,
-    level
-})
-
+import { handleLevels } from './levelsQuery'
+//todo: permit CUD only for INSTITUTE rol
 export const resolvers = {
+    Query: {
+        levels: handleLevels
+    },
     Mutation: {
         levelCreate: handleLevelCreate,
         levelUpdate: handleLevelUpdate,
