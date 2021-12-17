@@ -10,11 +10,6 @@ import { resolvers as levelResolvers } from './level/levelResolvers';
 
 import models  from '../models';
 import db  from '../models';
-// const server = new ApolloServer({
-//     typeDefs:[userTypeDefs, applicationTypeDefs, credentialSourceTypeDefs], 
-//     resolvers:[userResolvers, applicationResolvers, resourceResolvers, roleResolvers, credentialsSourceResolvers],
-//     context: (req: any) => ({ models, req }),
-// });
 
 const server = new ApolloServer({
     typeDefs:[teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs],

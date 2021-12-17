@@ -4,20 +4,18 @@ import { LevelError } from '../../errors/levelError';
 import log from 'loglevel'
 log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc: "ERROR")
 
-export const handleLevelDelete = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
+export const handleLevelById = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
     try {
         const { userInstituteId  } = await tenantContext(req)
-        const levelToDelete = await models.Level.findOne({
+        const level = await models.Level.findOne({
             where : {
                 id : args.id,
                 InstituteId : userInstituteId //tenant security check
             }
         })
-        if (!levelToDelete) throw new LevelError('No se encontró el nivel', { id: args.id, name: '', InstituteId : userInstituteId})
-        await levelToDelete.destroy()
-        return handleLevelOk('Nivel eliminado', levelToDelete)
+        if (!level) throw new LevelError('No se encontró el nivel', { id: args.id, name: '', InstituteId : userInstituteId})
+        return handleLevelOk('Nivel', level)
     } catch (e : any) {
         return handleLevelError(e)
     }
 }
-
