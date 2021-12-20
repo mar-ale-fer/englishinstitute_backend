@@ -17,15 +17,6 @@ export const typeDefs = gql`
     institute: Institute!
   }
 
-  type User {
-    id: ID!
-    firstName: String
-    lastName: String
-    email: String
-    roles: String
-    institute: Institute
-  }
-
   type Institute {
     id: ID!
     name: String
