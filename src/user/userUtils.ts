@@ -1,5 +1,7 @@
 import log from 'loglevel';
 import models  from '../../models';
+import { userType } from '../../types/userType';
+import { UserError } from './userError';
 
 export const getUserInstituteId = async ( email : string) : Promise<number> => {
     try {
@@ -16,3 +18,11 @@ export const getUserInstituteId = async ( email : string) : Promise<number> => {
     }
 }
 
+export const userExists = async (user : userType) => {
+    const userFound = await models.User.findOne({
+        where : {
+            email : user.email, //The user is unique for all the application tenants
+        }
+    })
+    if (userFound) throw new UserError('Ya existe el usuario', {...user, id : 0})
+}

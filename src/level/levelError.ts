@@ -1,4 +1,4 @@
-import { levelType } from "../types/levelType";
+import { levelType } from "../../types/levelType";
 export class LevelError extends Error {
     level : levelType
     constructor ( message: string, level : levelType) {

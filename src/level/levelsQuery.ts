@@ -10,7 +10,7 @@ export const handleLevels = async(_: any, args: any, { models, req}: {models: an
     let where: any = {}
     if (args.name && args.name !=="") {where.name = {[Op.iLike]: args.name+'%'}}
     try {
-        const { userInstituteId  } = await tenantContext(req)
+        const { userInstituteId  } = await tenantContext(req, 'LEVELS')
         where.InstituteId = userInstituteId //tenant security filter
 
         const levels : levelType[] = models.Level.findAll({

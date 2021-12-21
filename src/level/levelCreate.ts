@@ -4,10 +4,10 @@ import { handleLevelError, handleLevelOk } from './handleLevelResponse'
 import { tenantContext } from '../credentials/tenantContext'
 import log from 'loglevel'
 log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc: "ERROR")
-
 export const handleLevelCreate = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
     try {
-        const { userInstituteId  } = await tenantContext(req)
+        const { userInstituteId  } = await tenantContext(req, 'LEVEL_CREATE')
+
         const newLevel: levelType = {
             id : null,
             name : args.name,

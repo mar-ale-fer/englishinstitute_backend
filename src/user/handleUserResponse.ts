@@ -1,27 +1,27 @@
 import log from 'loglevel'
-import { LevelError} from './levelError'
-import { levelType} from '../../types/levelType'
-export const handleLevelError = (e : Error ) => {
+import { UserError} from './userError'
+import { userType} from '../../types/userType'
+export const handleUserError = (e : Error ) => {
     log.error(e)
     //const message = e.name === 'SequelizeUniqueConstraintError'? 'Ya existe el nivel que intentas crear' : e.message
 
-    if (e instanceof LevelError) {
+    if (e instanceof UserError) {
         return {
             success : false,
             message: `${e.message}`,
-            level : e.level
+            user : e.user
         }
     }
     return  {
         success : false,
         message : `${e.message}`,
-        level: {
+        user: {
             id : 0,
             name : ''
 }}}
 
-export const handleLevelOk = (message: string, level : levelType) =>  ({
+export const handleUserOk = (message: string, user : userType) =>  ({
     success : true,
     message,
-    level
+    user
 })

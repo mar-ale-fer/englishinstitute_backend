@@ -7,13 +7,15 @@ import { typeDefs as instituteTypeDefs } from './institute/InstituteTypeDefs';
 import { resolvers as instituteResolvers } from './institute/InstituteResolvers';
 import { typeDefs as levelTypeDefs } from './level/LevelTypeDefs';
 import { resolvers as levelResolvers } from './level/levelResolvers';
+import { typeDefs as userTypeDefs } from './user/UserTypeDefs';
+import { resolvers as userResolvers } from './user/userResolvers';
 
 import models  from '../models';
 import db  from '../models';
 
 const server = new ApolloServer({
-    typeDefs:[teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs],
-    resolvers:[instituteResolvers, credentialsResolvers, levelResolvers],
+    typeDefs:[teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs, userTypeDefs],
+    resolvers:[instituteResolvers, credentialsResolvers, levelResolvers, userResolvers],
     context: (req: any) => ({ models, req }),
 })
 

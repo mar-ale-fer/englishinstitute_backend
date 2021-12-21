@@ -1,7 +1,7 @@
 import { levelExists } from '../level/levelUtils'
 import { handleLevelError, handleLevelOk } from './handleLevelResponse'
 import { tenantContext } from '../credentials/tenantContext'
-import { LevelError } from '../../errors/levelError';
+import { LevelError } from './levelError';
 import { levelType } from '../../types/levelType';
 
 import log from 'loglevel'
@@ -9,7 +9,7 @@ log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc: 
 
 export const handleLevelUpdate = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
     try {
-        const { userInstituteId  } = await tenantContext(req)
+        const { userInstituteId  } = await tenantContext(req, 'LEVEL_UPDATE')
         const newLevel: levelType = {
             id : args.id,
             name : args.name,

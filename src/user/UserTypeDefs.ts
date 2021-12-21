@@ -8,7 +8,7 @@ export const typeDefs = gql`
       email: String!,
       password: String!,
       mustChangePassword: Boolean!,
-      roles: String!
+      roles: [String]!
     ): userList!
 
     userById(
@@ -30,18 +30,18 @@ export const typeDefs = gql`
       email: String!,
       password: String!,
       mustChangePassword: Boolean!,
-      roles: String!
+      roles: [String]!,
     ): UserCRUDResponse!
-    levelUpdate(
+    userUpdate(
       id: ID!
       firstName: String!,
       lastName: String!,
       email: String!,
       password: String!,
       mustChangePassword: Boolean!,
-      roles: String!
+      roles: [String]!
     ): UserCRUDResponse!
-    levelDelete(
+    userDelete(
       id: ID!
     ): UserCRUDResponse!
   }
@@ -49,7 +49,7 @@ export const typeDefs = gql`
   type UserCRUDResponse {
     success: Boolean!
     message: String!
-    level: User!
+    user: User!
   }
 
   type User {
@@ -59,4 +59,5 @@ export const typeDefs = gql`
     email: String
     roles: String
   }
+
 `;
