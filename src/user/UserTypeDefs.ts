@@ -6,9 +6,6 @@ export const typeDefs = gql`
       firstName: String!,
       lastName: String!,
       email: String!,
-      password: String!,
-      mustChangePassword: Boolean!,
-      roles: [String]!
     ): userList!
 
     userById(
@@ -57,7 +54,10 @@ export const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    roles: [String]!
+    roles: Roles
   }
 
+  type Roles {
+    roles: [String]!
+  }
 `;

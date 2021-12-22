@@ -11,3 +11,15 @@ export type userType = {
     roles: rolesType //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','INSTITUTE]"}
     InstituteId: number
   }
+
+export const EmptyUser : userType = {
+  id: 0,
+  firstName: "",
+  lastName: "",
+  email: "",
+  backend: false,
+  password: "",
+  mustChangePassword: false,
+  roles: { roles:[]},
+  InstituteId: 0
+}

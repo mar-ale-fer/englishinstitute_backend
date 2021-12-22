@@ -1,17 +1,16 @@
 import { handleUserCreate} from './userCreate'
 import { handleUserUpdate } from './userUpdate'
-// import { handleUserDelete } from './userDelete'
-// import { handleUsers } from './usersQuery'
-// import { handleUserById } from './userByIdQuery'
-//todo: permit CRUD only for INSTITUTE rol
+import { handleUserDelete } from './userDelete'
+import { handleUsers } from './usersQuery'
+import { handleUserById } from './userByIdQuery'
 export const resolvers = {
-    // Query: {
-    //     levels: handleUsers,
-    //     levelById: handleUserById
-    // },
+    Query: {
+        users: handleUsers,
+        userById: handleUserById
+    },
     Mutation: {
         userCreate: handleUserCreate,
         userUpdate: handleUserUpdate,
-        // levelDelete: handleUserDelete
+        userDelete: handleUserDelete
     }
 }
