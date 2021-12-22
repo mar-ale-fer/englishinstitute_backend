@@ -2,6 +2,7 @@ import log from 'loglevel';
 import models  from '../../models';
 import { userType } from '../../types/userType';
 import { UserError } from './userError';
+import { Op } from "sequelize";
 
 export const getUserInstituteId = async ( email : string) : Promise<number> => {
     try {
@@ -19,10 +20,12 @@ export const getUserInstituteId = async ( email : string) : Promise<number> => {
 }
 
 export const userExists = async (user : userType) => {
+    let where : any ={}
+    where.email = { [Op.eq]: user.email}
+    if (user.id) where.id = { [Op.not]: user.id} //id= null > insert | id!= null > update
+
     const userFound = await models.User.findOne({
-        where : {
-            email : user.email, //The user is unique for all the application tenants
-        }
+        where : where
     })
     if (userFound) throw new UserError('Ya existe el usuario', {...user, id : 0})
 }

@@ -1,5 +1,5 @@
 import { handleUserCreate} from './userCreate'
-// import { handleUserUpdate } from './userUpdate'
+import { handleUserUpdate } from './userUpdate'
 // import { handleUserDelete } from './userDelete'
 // import { handleUsers } from './usersQuery'
 // import { handleUserById } from './userByIdQuery'
@@ -10,8 +10,8 @@ export const resolvers = {
     //     levelById: handleUserById
     // },
     Mutation: {
-        levelCreate: handleUserCreate,
-        // levelUpdate: handleUserUpdate,
+        userCreate: handleUserCreate,
+        userUpdate: handleUserUpdate,
         // levelDelete: handleUserDelete
     }
 }
