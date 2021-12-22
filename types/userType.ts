@@ -5,9 +5,9 @@ export type userType = {
     firstName: string
     lastName: string
     email: string
-    mustChangePassword: boolean
-    password: string
-    backend: boolean //is a platform's IT backender?
+    mustChangePassword?: boolean
+    password?: string
+    backend?: boolean //is a platform's IT backender?
     roles: rolesType //{"roles" : "['STUDENT','TEACHER','ADMINISTRATOR','INSTITUTE]"}
     InstituteId: number
   }

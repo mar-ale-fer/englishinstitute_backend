@@ -34,12 +34,14 @@ export const typeDefs = gql`
       firstName: String!,
       lastName: String!,
       email: String!,
-      password: String!,
-      mustChangePassword: Boolean!,
       roles: [String]!
     ): UserCRUDResponse!
     userDelete(
       id: ID!
+    ): UserCRUDResponse!
+    userChangePassword(
+      id: ID!
+      Password: String!,
     ): UserCRUDResponse!
   }
 
