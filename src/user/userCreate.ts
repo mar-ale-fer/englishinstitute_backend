@@ -20,7 +20,7 @@ export const handleUserCreate = async(_: any, args: any, { models, req}: {models
             firstName : args.firstName,
             lastName: args.lastName,
             email: (args.email  as string).toLowerCase(),
-            mustChangePassword: true,
+            mustChangePassword: args.mustChangePassword,
             password: hashedPassword,
             backend: false, //this is true only in create-super-user
             roles: {roles:args.roles},
