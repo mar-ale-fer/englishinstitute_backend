@@ -44,6 +44,9 @@ export const typeDefs = gql`
       id: ID!
       Password: String!,
     ): UserCRUDResponse!
+    userOwnChangePassword(
+      Password: String!,
+    ): UserCRUDResponse!
   }
 
   type UserCRUDResponse {
@@ -57,6 +60,7 @@ export const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
+    mustChangePassword: Boolean
     roles: Roles
   }
 

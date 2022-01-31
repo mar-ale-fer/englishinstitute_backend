@@ -4,6 +4,7 @@ import { handleUserDelete } from './userDelete'
 import { handleUsers } from './usersQuery'
 import { handleUserById } from './userByIdQuery'
 import { handleUserChangePassword } from './userChangePassword'
+import { handleUserOwnChangePassword } from './userOwnChangePassword'
 export const resolvers = {
     Query: {
         users: handleUsers,
@@ -13,6 +14,7 @@ export const resolvers = {
         userCreate: handleUserCreate,
         userUpdate: handleUserUpdate,
         userDelete: handleUserDelete,
-        userChangePassword: handleUserChangePassword
+        userChangePassword: handleUserChangePassword,
+        userOwnChangePassword: handleUserOwnChangePassword
     }
 }

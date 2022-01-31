@@ -7,13 +7,13 @@ import bcrypt from 'bcrypt'
 import log from 'loglevel'
 log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc: "ERROR")
 
-export const handleUserChangePassword = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
+export const handleUserOwnChangePassword = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
     try {
-        const { userInstituteId  } = await tenantContext(req,'USER_CHANGE_PASSWORD')
+        const { userInstituteId, sessionUser  } = await tenantContext(req,'USER_OWN_CHANGE_PASSWORD')
         console.log(args)
         const userToUpdate = await models.User.findOne({
             where : {
-                id : args.id,
+                email : sessionUser && sessionUser.email , //the user change his own password
                 InstituteId : userInstituteId //tenant security check
             }
         })
@@ -24,9 +24,9 @@ export const handleUserChangePassword = async(_: any, args: any, { models, req}:
         const hashedPassword : string = await bcrypt.hash(args.Password, salt);
 
         userToUpdate.password = hashedPassword
-        userToUpdate.mustChangePassword = true
+        userToUpdate.mustChangePassword = false
         await userToUpdate.save()
-        return handleUserOk('Password modificado', userToUpdate)
+        return handleUserOk('Password propio modificado', userToUpdate)
 
     } catch (e : any) {
         return handleUserError(e)
