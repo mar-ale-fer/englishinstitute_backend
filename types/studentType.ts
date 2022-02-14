@@ -8,10 +8,11 @@ export type studentType = {
       email: string
       observations: string
       auditLastUser: string
+      InstituteId: number
 }
 
 
-export const EmptyStudent : studentType = {
+export const EmptyStudent: studentType = {
       id: 0,
       firstName: "",
       lastName: "",
@@ -20,5 +21,6 @@ export const EmptyStudent : studentType = {
       phoneNumber: "",
       email: "",
       observations: "",
-      auditLastUser: "|"
-    }
+      auditLastUser: "",
+      InstituteId: 0
+}

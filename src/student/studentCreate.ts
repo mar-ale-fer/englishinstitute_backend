@@ -2,13 +2,13 @@ import { studentType } from "../../types/studentType";
 import { handleStudentError, handleStudentOk } from "./handleStudentResponse";
 import { tenantContext } from "../credentials/tenantContext";
 import log from 'loglevel'
-log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc: "ERROR")
-export const handleStudentCreate = async(_: any, args: any, { models, req}: {models: any, req: any}) => {
+log.setLevel(process.env.LOG_LEVEL ? process.env.LOG_LEVEL as log.LogLevelDesc : "ERROR")
+export const handleStudentCreate = async (_: any, args: any, { models, req }: { models: any, req: any }) => {
     try {
         const { userInstituteId, sessionUser } = await tenantContext(req, 'STUDENT_CREATE')
 
         const newStudent: studentType = {
-            id : null,
+            id: null,
             firstName: args.firstName,
             lastName: args.lastName,
             documentNumber: args.documentNumber,
@@ -16,11 +16,12 @@ export const handleStudentCreate = async(_: any, args: any, { models, req}: {mod
             phoneNumber: args.phoneNumber,
             email: args.email,
             observations: args.observations,
-            auditLastUser: sessionUser?.email || ''
+            auditLastUser: sessionUser?.email || '',
+            InstituteId: userInstituteId
         }
         const insertedStudent = await models.Student.create(newStudent)
         return handleStudentOk('Estudiante creado', insertedStudent)
-    } catch (e : any) {
+    } catch (e: any) {
         return handleStudentError(e)
     }
 }

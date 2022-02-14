@@ -10,6 +10,7 @@ export const typeDefs = gql`
   type CredentialsResponse {
       success: Boolean!
       message: String!
+      user: User!
       token: String!
   }  
 `;

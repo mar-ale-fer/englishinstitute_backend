@@ -1,6 +1,7 @@
 require('dotenv').config();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
+import { EmptyUser } from '../../types/userType';
 const jwt_secret  = process.env.JWT_SECRET;
 const jwt_expires_in_seconds = process.env.JWT_EXPIRES_IN_SECONDS ? parseInt(process.env.JWT_EXPIRES_IN_SECONDS) : 0;
 
@@ -13,6 +14,7 @@ export const resolvers =  {
         return {
           success: false,
           message: 'Faltan parámetros de configuración para crear el token', 
+          user: EmptyUser,
           token: ''
         }         
       }
@@ -21,6 +23,7 @@ export const resolvers =  {
         return {
           success: false,
           message: 'Configuración incorrecta que impide definir la duración del token', 
+          user: EmptyUser,
           token: ''
         }           
       }
@@ -34,6 +37,7 @@ export const resolvers =  {
 
       if (!user) return {
         success: false,
+        user: EmptyUser,
         message: 'No existe el usuario', 
         token: ''        
       }
@@ -42,6 +46,7 @@ export const resolvers =  {
         return {
           success: false,
           message: 'Password incorrecto', 
+          user:EmptyUser,
           token: ''
         } 
       }
@@ -62,6 +67,7 @@ export const resolvers =  {
       return {
         success: true,
         message: 'Usuario autenticado', 
+        user: user,
         token: token
       }         
     

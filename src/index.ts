@@ -9,13 +9,15 @@ import { typeDefs as levelTypeDefs } from './level/LevelTypeDefs';
 import { resolvers as levelResolvers } from './level/levelResolvers';
 import { typeDefs as userTypeDefs } from './user/UserTypeDefs';
 import { resolvers as userResolvers } from './user/userResolvers';
+import { typeDefs as studentTypeDefs } from './student/StudentTypeDefs';
+import { resolvers as studentResolvers } from './student/studentResolvers'
 
-import models  from '../models';
-import db  from '../models';
+import models from '../models';
+import db from '../models';
 
 const server = new ApolloServer({
-    typeDefs:[teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs, userTypeDefs],
-    resolvers:[instituteResolvers, credentialsResolvers, levelResolvers, userResolvers],
+    typeDefs: [teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs, userTypeDefs, studentTypeDefs],
+    resolvers: [instituteResolvers, credentialsResolvers, levelResolvers, userResolvers, studentResolvers],
     context: (req: any) => ({ models, req }),
 })
 
@@ -29,6 +31,6 @@ const server = new ApolloServer({
 
 
 // //normal mode
-server.listen().then(({ url }: {url:String}) => {
+server.listen().then(({ url }: { url: String }) => {
     console.log(`Server listening at ${url}`);
 })

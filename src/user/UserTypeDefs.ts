@@ -13,6 +13,8 @@ export const typeDefs = gql`
       id: ID!,
       debug: String!,
       ):UserCRUDResponse!
+
+    LoggedUser:UserCRUDResponse!
   }
 
   type userList{
