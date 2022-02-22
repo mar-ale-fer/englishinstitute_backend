@@ -11,7 +11,6 @@ export type studentType = {
       InstituteId: number
 }
 
-
 export const EmptyStudent: studentType = {
       id: 0,
       firstName: "",

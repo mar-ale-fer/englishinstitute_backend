@@ -39,6 +39,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "loglevel": "^1.8.0",
+    "moment": "^2.29.1",
     "pg": "^8.7.1",
     "prompt": "^1.2.0",
     "sequelize": "^6.12.0-alpha.1",

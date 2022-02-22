@@ -31,11 +31,26 @@ export const typeDefs = gql`
             firstName: String!
             lastName: String!
             documentNumber: String!
-            dateOfBirth: Date!
+            dateOfBirth: String!
             phoneNumber: String!
             email: String!
             observations: String!
         ): StudentCRUDResponse!
+
+        studentUpdate(
+            id: ID!
+            firstName: String!
+            lastName: String!
+            documentNumber: String!
+            dateOfBirth: String!
+            phoneNumber: String!
+            email: String!
+            observations: String!
+        ): StudentCRUDResponse!
+
+        studentDelete(
+            id: ID!
+          ): StudentCRUDResponse!
     }
 
     type StudentCRUDResponse {

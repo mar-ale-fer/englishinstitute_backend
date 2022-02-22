@@ -1,6 +1,9 @@
-import { handleStudents } from "./studentQuery";
+import { handleStudents } from "./studentsQuery";
 import { handleStudentById } from "./studentByIdQuery";
 import { handleStudentCreate } from "./studentCreate";
+import { handleStudentUpdate } from "./studentUpdate";
+import { handleStudentDelete } from "./studentDelete";
+
 import { GraphQLScalarType, Kind } from 'graphql';
 const dateScalar = new GraphQLScalarType({
     name: 'Date',
@@ -28,7 +31,7 @@ export const resolvers = {
     },
     Mutation: {
         studentCreate: handleStudentCreate,
-        // studentUpdate: handleStudentUpdate,
-        // studentDelete: handleStudentDelete
+        studentUpdate: handleStudentUpdate,
+        studentDelete: handleStudentDelete
     }
 }
