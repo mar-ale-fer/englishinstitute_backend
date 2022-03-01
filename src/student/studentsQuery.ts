@@ -11,7 +11,6 @@ export const handleStudents = async (_: any, args: any, { models, req }: { model
     if (args.firstName && args.firstName !== "") { where.firstName = { [Op.iLike]: args.firstName + '%' } }
     if (args.lastName && args.lastName !== "") { where.lastName = { [Op.iLike]: args.lastName + '%' } }
     if (args.documentNumber && args.documentNumber !== "") { where.documentNumber = { [Op.iLike]: args.documentNumber + '%' } }
-    if (args.phoneNumber && args.phoneNumber !== "") { where.phoneNumber = { [Op.iLike]: args.phoneNumber + '%' } }
     if (args.email && args.lastName !== "") { where.email = { [Op.iLike]: args.email + '%' } }
     if (args.observations && args.observations !== "") { where.observations = { [Op.iLike]: '%' + args.observations + '%' } }
 

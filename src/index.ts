@@ -10,25 +10,32 @@ import { resolvers as levelResolvers } from './level/levelResolvers';
 import { typeDefs as userTypeDefs } from './user/UserTypeDefs';
 import { resolvers as userResolvers } from './user/userResolvers';
 import { typeDefs as studentTypeDefs } from './student/StudentTypeDefs';
-import { resolvers as studentResolvers } from './student/studentResolvers'
+import { resolvers as studentResolvers } from './student/studentResolvers';
+
+import { typeDefs as courseTypeDefs } from './Course/CourseTypeDefs';
+import { resolvers as courseResolvers } from './Course/courseResolvers';
+
 
 import models from '../models';
 import db from '../models';
 
 const server = new ApolloServer({
-    typeDefs: [teacherTypeDefs, instituteTypeDefs, credentialsTypeDefs, levelTypeDefs, userTypeDefs, studentTypeDefs],
-    resolvers: [instituteResolvers, credentialsResolvers, levelResolvers, userResolvers, studentResolvers],
+    typeDefs: [teacherTypeDefs, instituteTypeDefs,
+        credentialsTypeDefs, levelTypeDefs, userTypeDefs,
+        studentTypeDefs, courseTypeDefs],
+    resolvers: [instituteResolvers, credentialsResolvers,
+        levelResolvers, userResolvers, studentResolvers,
+        courseResolvers],
     context: (req: any) => ({ models, req }),
 })
 
 // // //migration mode
-// //db.sequelize.sync({ match: /_dev$/}).then(() => {
+// db.sequelize.sync({ match: /_dev$/ }).then(() => {
 // db.sequelize.sync({ match: /institutedb$/, force: true }).then(() => {
-// server.listen().then(({ url }: {url:String}) => {
-//     console.log(`Server listening at ${url}`);
+//     server.listen().then(({ url }: { url: String }) => {
+//         console.log(`Server listening at ${url}`);
+//     })
 // })
-// })
-
 
 // //normal mode
 server.listen().then(({ url }: { url: String }) => {

@@ -8,9 +8,9 @@ export const typeDefs = gql`
             firstName: String!,
             lastName: String!,
             documentNumber: String!,
-            phoneNumber: String!,
             email: String!,
-            observations: String!
+            observations: String!,
+            debug: String!,
         ) : StudentList!
 
         studentById(

@@ -1,5 +1,5 @@
 'use strict';
-import {Model} from 'sequelize';
+import { Model } from 'sequelize';
 
 interface CourseAttributes {
   id: number;
@@ -8,39 +8,39 @@ interface CourseAttributes {
   details: string;
   monthlyPrice: number;
   active: boolean;
-  auditLastUser: string;  
+  auditLastUser: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
 
   class Course extends Model<CourseAttributes>
-  implements CourseAttributes {
+    implements CourseAttributes {
     id!: number;
     year!: number;
     schedule!: string;
     details!: string;
     monthlyPrice!: number;
     active!: boolean;
-    auditLastUser!: string;    
+    auditLastUser!: string;
     static associate(models: any) {
-      Course.belongsTo(models.Level,{
+      Course.belongsTo(models.Level, {
         foreignKey: { allowNull: false },
-        onDelete:"RESTRICT",
-        onUpdate:"RESTRICT",
+        onDelete: "RESTRICT",
+        onUpdate: "RESTRICT",
       })
-      Course.belongsTo(models.Teacher,{
+      // Course.belongsTo(models.Teacher,{
+      //   foreignKey: { allowNull: false },
+      //   onDelete:"RESTRICT",
+      //   onUpdate:"RESTRICT",
+      // })
+      Course.belongsToMany(models.Student, {
+        through: 'Enrollment'
+      })
+      Course.belongsTo(models.Institute, {
         foreignKey: { allowNull: false },
-        onDelete:"RESTRICT",
-        onUpdate:"RESTRICT",
+        onDelete: "RESTRICT",
+        onUpdate: "RESTRICT",
       })
-      Course.belongsToMany(models.Student,{
-          through: 'Enrollment'
-      })
-      Course.belongsTo(models.Institute,{
-        foreignKey: { allowNull: false },
-        onDelete:"RESTRICT",
-        onUpdate:"RESTRICT",
-      })      
     }
   };
   Course.init({
@@ -50,32 +50,32 @@ module.exports = (sequelize: any, DataTypes: any) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    year:{
+    year: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    schedule:{
+    schedule: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    details:{
+    details: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    monthlyPrice:{
-      type: DataTypes.DECIMAL(10,2),
+    monthlyPrice: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    active:{
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    auditLastUser:{
+    auditLastUser: {
       type: DataTypes.STRING,
       allowNull: false,
-    },                  
+    },
   }, {
-    sequelize, 
+    sequelize,
     modelName: 'Course',
   });
   return Course;

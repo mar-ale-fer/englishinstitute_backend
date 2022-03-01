@@ -1,34 +1,34 @@
 'use strict';
-import {Model} from 'sequelize';
+import { Model } from 'sequelize';
 
 interface TeacherAttributes {
   id: number;
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  auditLastUser: string;  
+  auditLastUser: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  
+
   class Teacher extends Model<TeacherAttributes>
-  implements TeacherAttributes {
+    implements TeacherAttributes {
     id!: number;
     firstName!: string;
     lastName!: string;
     phoneNumber!: string;
-    auditLastUser!: string;    
+    auditLastUser!: string;
     static associate(models: any) {
-      Teacher.hasMany(models.Course,{
+      // Teacher.hasMany(models.Course,{
+      //   foreignKey: { allowNull: false },
+      //   onDelete:"RESTRICT",
+      //   onUpdate:"RESTRICT",
+      // })
+      Teacher.belongsTo(models.Institute, {
         foreignKey: { allowNull: false },
-        onDelete:"RESTRICT",
-        onUpdate:"RESTRICT",
+        onDelete: "RESTRICT",
+        onUpdate: "RESTRICT",
       })
-      Teacher.belongsTo(models.Institute,{
-        foreignKey: { allowNull: false },
-        onDelete:"RESTRICT",
-        onUpdate:"RESTRICT",
-      })      
     }
   };
   Teacher.init({
@@ -38,22 +38,22 @@ module.exports = (sequelize: any, DataTypes: any) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },    
-    lastName:{
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phoneNumber:{
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    auditLastUser:{
+    phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
-    },      
+    },
+    auditLastUser: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Teacher',
