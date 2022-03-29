@@ -11,7 +11,7 @@ type studentResource = 'STUDENTS' | 'STUDENT_BY_ID' | 'STUDENT_CREATE' | 'STUDEN
     'STUDENT_DELETE';
 
 type courseResource = 'COURSES' | 'COURSE_BY_ID' | 'COURSE_CREATE' | 'COURSE_UPDATE' |
-    'COURSE_DELETE';
+    'COURSE_DELETE' | 'COURSE_ADD_STUDENT' | 'COURSE_REMOVE_STUDENT';
 
 export type resource = levelResource
     | userResource
@@ -29,5 +29,6 @@ export const userAllResources: userResource[] = [...userCRUDResources, 'USERS', 
 export const studentCRUDResources: studentResource[] = ['STUDENT_CREATE', 'STUDENT_UPDATE', 'STUDENT_DELETE'];
 export const studentAllResources: studentResource[] = [...studentCRUDResources, 'STUDENTS', 'STUDENT_BY_ID'];
 
-export const courseCRUDResources: courseResource[] = ['COURSE_CREATE', 'COURSE_UPDATE', 'COURSE_DELETE'];
+export const courseCRUDResources: courseResource[] = ['COURSE_CREATE', 'COURSE_UPDATE', 'COURSE_DELETE',
+    'COURSE_ADD_STUDENT', 'COURSE_REMOVE_STUDENT'];
 export const courseAllResources: courseResource[] = [...courseCRUDResources, 'COURSES', 'COURSE_BY_ID'];

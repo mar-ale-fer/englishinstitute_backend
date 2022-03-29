@@ -46,6 +46,9 @@ export const typeDefs = gql`
         courseDelete(
             id: ID!
         ) : CourseCRUDResponse!
+
+        addStudentToCourse(courseId: ID!, studentId: ID!): CourseCRUDResponse!
+        removeStudentFromCourse(courseId: ID!, studentId: ID!): CourseCRUDResponse!
     }
 
     type CourseCRUDResponse {
@@ -62,6 +65,7 @@ export const typeDefs = gql`
         monthlyPrice: Float!,
         active: Boolean,
         auditLastUser: String!,
-        level: Level!    
+        level: Level!,
+        students: [Student]  
     }
 `;

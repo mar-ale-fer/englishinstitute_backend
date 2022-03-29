@@ -69,6 +69,7 @@ export const typeDefs = gql`
         email: String!
         observations: String!
         auditLastUser: String!
+        courses: [Course]
     }
 
 `;

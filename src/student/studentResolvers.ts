@@ -33,5 +33,16 @@ export const resolvers = {
         studentCreate: handleStudentCreate,
         studentUpdate: handleStudentUpdate,
         studentDelete: handleStudentDelete
+    },
+    //The attribute of Course thats return the level
+    Student: {
+        courses: async (Student: any, _: any, { models }: { models: any }) => {
+            console.log(`--Student.courses. Student.id:${Student.id}`);
+
+            const aStudent = await models.Student.findByPk(Student.id);
+            if (!aStudent) return [];
+            const courses = await aStudent.getCourses();
+            return courses;
+        },
     }
 }
