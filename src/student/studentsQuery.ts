@@ -15,7 +15,7 @@ export const handleStudents = async (_: any, args: any, { models, req }: { model
     if (args.observations && args.observations !== "") { where.observations = { [Op.iLike]: '%' + args.observations + '%' } }
 
     try {
-        const { userInstituteId } = await tenantContext(req, 'USERS')
+        const { userInstituteId } = await tenantContext(req, 'STUDENTS')
         where.InstituteId = userInstituteId //tenant security filter
 
         const students: studentType[] = models.Student.findAll({
