@@ -11,6 +11,7 @@ export const resolvers =  {
       console.log(args);
 
       if (jwt_secret == undefined) {
+        console.log('faltan parámetros')
         return {
           success: false,
           message: 'Faltan parámetros de configuración para crear el token', 
@@ -18,8 +19,10 @@ export const resolvers =  {
           token: ''
         }         
       }
-
+      console.log('001');
       if (jwt_expires_in_seconds <=0 ){
+        console.log('configuracion incorrecta')
+
         return {
           success: false,
           message: 'Configuración incorrecta que impide definir la duración del token', 
@@ -27,6 +30,7 @@ export const resolvers =  {
           token: ''
         }           
       }
+      console.log('002');
 
       //compare hashed password with stored password
       const user = await models.User.findOne({
@@ -34,6 +38,7 @@ export const resolvers =  {
           email: (args.user as string).toLowerCase(), //the email is ever stored in lowercase
         } 
       });
+      console.log('003');
 
       if (!user) return {
         success: false,
@@ -41,8 +46,11 @@ export const resolvers =  {
         message: 'No existe el usuario', 
         token: ''        
       }
+      console.log('004');
+
       const comparisonResult = await bcrypt.compare(args.password, user.password);
       if (!comparisonResult) {
+        console.log('password incorrecto')
         return {
           success: false,
           message: 'Password incorrecto', 
@@ -50,6 +58,7 @@ export const resolvers =  {
           token: ''
         } 
       }
+      console.log('005');
 
       //Store user info in the token
       const tokenInfo = {
@@ -59,11 +68,14 @@ export const resolvers =  {
         roles: user.roles,
         backend: user.backend
       }
+      console.log('006');
+
       const token= jwt.sign(tokenInfo, jwt_secret, { expiresIn: jwt_expires_in_seconds });
       console.log(token);
       const theUser2 = jwt.verify(token, jwt_secret);
       console.log(theUser2);
 
+      console.log('usuario autenticado')
       return {
         success: true,
         message: 'Usuario autenticado', 

@@ -17,7 +17,6 @@ import { resolvers as courseResolvers } from './Course/courseResolvers';
 
 
 import models from '../models';
-import db from '../models';
 
 const server = new ApolloServer({
     typeDefs: [teacherTypeDefs, instituteTypeDefs,
@@ -29,15 +28,6 @@ const server = new ApolloServer({
     context: (req: any) => ({ models, req }),
 })
 
-// // //migration mode
-// db.sequelize.sync({ match: /_dev$/ }).then(() => {
-// db.sequelize.sync({ match: /institutedb$/, force: true }).then(() => {
-//     server.listen().then(({ url }: { url: String }) => {
-//         console.log(`Server listening at ${url}`);
-//     })
-// })
-
-// //normal mode
 server.listen().then(({ url }: { url: String }) => {
     console.log(`Server listening at ${url}`);
 })
